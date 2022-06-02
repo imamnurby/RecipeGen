@@ -1,0 +1,22 @@
+26-5-2022
+- i train a new model with two prefixes for channel only and channel+function generation mode
+- the name of the model is rob2rand_chen_w_prefix_26-5-22
+
+
+30-5-2022
+- i evaluate the model that i trained on 26-5-2022, and:
+    - the result for function-level generation is similar to the original one (without prefix)
+    - the result for channel-level is quite high and satisfying
+- i uploade the model to the hub with name: rob2rand_chen_w_prefix_c_fc (https://huggingface.co/imamnurby/rob2rand_chen_w_prefix_c_fc)
+
+2-6-2022
+- i create a new dataset comprised of mi + chen
+- i remove samples that do not have channel/function descriptions in the new dataset
+- i do not remove the intersection from both mi and chen (unlike in icpc paper, i remove them). i think more data is better as long as there is no data leakage
+- the dataset can be found in dataset-original folder
+- metadata.csv contains the description for each channel and function
+- original.csv contains the original dataset that has been concatenated
+- processed.csv contains pairs of source and target
+- i train a new model using training_merged_new.ipynb and the model name is rob2rand_merged_w_prefix_c_fc
+
+    
