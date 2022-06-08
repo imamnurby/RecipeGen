@@ -1254,7 +1254,9 @@ class CustomTrainer(Seq2SeqTrainer):
             ignore_keys=ignore_keys,
             metric_key_prefix=metric_key_prefix,
         )
-        
+        # print(output.predictions)
+        # print(output.label_ids)
+        # print(all_input_ids)
         decoded_preds, decoded_labels, decoded_input_ids = self._decode(output.predictions, output.label_ids, all_input_ids)
         decoded_preds = list(chunked(decoded_preds, self._num_beams))
         
