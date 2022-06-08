@@ -1,3 +1,12 @@
+files:
+- inference_merged_oneshot.ipynb --> latest inference notebook using merge data + prefix for channel function and field
+- train_merged.py --> train on merge data using prefix for channel function and field
+- inference_merged_interactive.ipynb --> inference on merge data, but this uses prefix for interactive mode
+- train_merged_interactive.py --> train on merge data using prefix for interactive generation
+- models.py --> CustomEncoderDecoder model definition
+- trainer.py --> CustomTrainer definition
+- data_collator --> CustomDataCollator definition
+
 26-5-2022
 - i train a new model with two prefixes for channel only and channel+function generation mode
 - the name of the model is rob2rand_chen_w_prefix_26-5-22
@@ -19,4 +28,11 @@
 - processed.csv contains pairs of source and target
 - i train a new model using training_merged_new.ipynb and the model name is rob2rand_merged_w_prefix_c_fc
 
-    
+4-6-2022
+- my experiment with rob2rand_merged_w_prefix_c_fc stopped suddenly at epoch 38
+- i backup the data to rob2rand_emrged_w_prefix_2-6-2022_bak
+- i continue the training at epoch 38 until epoch 50 and save it to rob2rand_merged_w_prefix-2-6-2022
+
+5-6-2022
+- i train a new model for interactive generation with name rob2rand_merged_w_prefix_interactive_5-6-2022 using script train_merged_interactive.py (the notebook is train_merged_interactive.ipynb)
+- i create one notebook for inference named inference.ipynb. it is used for both interactive and oneshot mode
