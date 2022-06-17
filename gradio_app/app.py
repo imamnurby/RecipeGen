@@ -365,7 +365,7 @@ def generate_channel(input_desc, n_beams_discover):
 ###
 demo = gr.Blocks()
 with demo:
-    gr.Markdown("<h1><center>RecipeGen: an Automated Trigger Action Programs (TAPs) Generation Tool</center></h1>")
+    gr.Markdown("<h1><center><em>RecipeGen++</em> | an Automated Trigger Action Programs (TAPs) Generation Tool</center></h1>")
     # gr.Markdown("This demo allows you to generate TAPs using functionality description described in English. You can learn the working detail of our tool from our paper")
     gr.Markdown("<h3>What is TAP?</h3>")
     gr.Markdown("""
@@ -373,16 +373,16 @@ with demo:
         TAPs are written in the form of "IF a {trigger} is satisfied then execute an {action}, where the {trigger} and the {action} correspond to API calls. 
         TAPs have been used in various use cases, ranging from the home monitoring system to business workflow automation.
         """)
-    gr.Markdown("<h3>What is RecipeGen?</h3>")
+    gr.Markdown("<h3>What is <em>RecipeGen++</em>?</h3>")
     gr.Markdown("""
-        RecipeGen is a deep learning-based tool that can assist end-users to generate TAPs using natural language description. 
-        End-users can describe the functionality of the intended TAP, then RecipeGen will generate the TAP candidates based on the given description.
+        *RecipeGen++* is a deep learning-based tool that can assist end-users to generate TAPs using natural language description. 
+        End-users can describe the functionality of the intended TAP, then *RecipeGen++* will generate the TAP candidates based on the given description.
     """)
     gr.Markdown("<h3>Working Mode</h3>")
     gr.Markdown("""
         - Interactive: generate a TAP using a step-by-step wizard
         - One-Click: generate a TAP using the one-click button
-        - Function Discovery: Discover relevant functionalities from channels with similar functionalities
+        - Functionality Discovery: discover relevant functionalities from channels with similar functionalities
     """)
     with gr.Tabs():
         with gr.TabItem("Interactive"):
@@ -398,7 +398,10 @@ with demo:
             
             with gr.Box():
                 with gr.Column():
-                    dropdown_example = gr.Dropdown(type ="value",choices = ["Log to my spreadsheet if motion is detected in the living room","When I am not home, let me know when any motion is detected in my house", "Turn on my Philips lamp every sunset","Update my picture in Twitter when I change my profile picture in Facebook","Save in notes when I create a new bookmark"], label = "Here are some sample functionality descriptions that you can try")
+                    gr.Markdown("You can describe your own functionality directly in the `Functionality Description` text box or try a description sample from the dropdown below:")
+                    dropdown_example = gr.Dropdown(type ="value",
+                                                   choices = ["Log to my spreadsheet if motion is detected in the living room","When I am not home, let me know when any motion is detected in my house", "Turn on my Philips lamp every sunset","Update my picture in Twitter when I change my profile picture in Facebook","Save in notes when I create a new bookmark"],
+                                                   label = "Select a sample functionality descriptions")
                     button_use_example = gr.Button("Try this sample")
                          
             with gr.Box():
@@ -455,6 +458,7 @@ with demo:
                     table_final = gr.Dataframe(headers=["Trigger","Action"], row_count=1)
         
             button_use_example.click(return_same, inputs=[dropdown_example], outputs=[textbox_input])
+            button_use_example.click(generate_preds_tc, inputs=[dropdown_example, n_beams_interactive], outputs=[table_tc])
             button_generate_tc.click(generate_preds_tc, inputs=[textbox_input, n_beams_interactive], outputs=[table_tc])
             
             table_tc.change(fn=update_dropdown_trig_ch, inputs=[table_tc], outputs=[dropdown_tc])
@@ -475,15 +479,17 @@ with demo:
         with gr.TabItem("One-Click"):
             gr.Markdown("<h3><center>Instructions for One-Click Mode</center></h3>")
             gr.Markdown("""
-                1. Describe the functionality in the `Functionality Description` text box.
-                2. Click `Generate TAP` button. The TAP candidates will show up in the `TAP Results` table. The table consists of 4 columns: Trigger, Action, Trigger Description, and Action Description. You can scroll the table vertically.
+                1. Describe the functionality by yourself in the `Functionality Description` text box
+                2. Click `Generate TAP` button. The TAP candidates will show up in the `TAP Results` table. The table consists of 4 columns: Trigger, Action, Trigger Description, and Action Description. You can scroll the table horizontally.
                 """)
             gr.Markdown(""" NOTE: You can control how many sequences are returned by tuning the `Beam Width` slider. A larger value will cause a longer generation time.""")
             
             with gr.Box():
                 with gr.Column():
-                    gr.Markdown("You can try some description samples below:")
-                    dropdown_example = gr.Dropdown(type ="value",choices = ["Log to my spreadsheet if motion is detected in the living room","When I am not home, let me know when any motion is detected in my house", "Turn on my Philips lamp every sunset","Update my picture in Twitter when I change my profile picture in Facebook","Save in notes when I create a new bookmark"], label = "Here are some sample functionality descriptions that you can try")
+                    gr.Markdown("You can describe your own functionality directly in the `Functionality Description` text box or try a description sample from the dropdown below:")
+                    dropdown_example = gr.Dropdown(type ="value",
+                                                   choices = ["Log to my spreadsheet if motion is detected in the living room","When I am not home, let me know when any motion is detected in my house", "Turn on my Philips lamp every sunset","Update my picture in Twitter when I change my profile picture in Facebook","Save in notes when I create a new bookmark"],
+                                                   label = "Select a sample functionality description")
                     button_use_example = gr.Button("Try this sample")
                     
             with gr.Box():
@@ -496,21 +502,24 @@ with demo:
                     gr.Markdown("<h4><center>TAP Results</center></h4>")
                     table_oneshot = gr.Dataframe(headers=["Trigger", "Action", "Trigger Description",  "Action Description"], row_count=1)
                     
-            button_use_example.click(return_same, inputs=[dropdown_example], outputs=[textbox_input])            
+            button_use_example.click(return_same, inputs=[dropdown_example], outputs=[textbox_input])
+            button_use_example.click(generate_oneshot, inputs=[dropdown_example, n_beams_oneshot], outputs=[table_oneshot])            
             button_generate_oneshot.click(generate_oneshot, inputs=[textbox_input, n_beams_oneshot], outputs=[table_oneshot])
         
         with gr.TabItem("Functionality Discovery"):
             gr.Markdown("<h3><center>Instructions for Functionality Discovery Mode</center></h3>")
             gr.Markdown("""
                 1. Describe the functionality in the `Functionality Description` text box.
-                2. Click `Discover Functionalities` button. The table containing relevant trigger and action channels will show up. Each channel is accompanied by a list of available functionalities.
+                2. Click `Discover Functionalities` button. The table containing relevant trigger and action channels will show up. Each channel is accompanied by a list of available functionalities. You can scroll the table horizontally.
                 """)
             gr.Markdown(""" NOTE: You can control how many sequences are returned by tuning the `Beam Width` slider. A larger value will cause a longer generation time.""")
             
             with gr.Box():
                 with gr.Column():
-                    gr.Markdown("You can try some description samples below:")
-                    dropdown_example = gr.Dropdown(type ="value",choices = ["Log to my spreadsheet if motion is detected in the living room","When I am not home, let me know when any motion is detected in my house", "Turn on my Philips lamp every sunset","Update my picture in Twitter when I change my profile picture in Facebook","Save in notes when I create a new bookmark"], label = "Here are some sample functionality descriptions that you can try")
+                    gr.Markdown("You can describe your own functionality directly in the `Functionality Description` text box or try a description sample from the dropdown below:")
+                    dropdown_example = gr.Dropdown(type ="value",
+                                                   choices = ["Log to my spreadsheet if motion is detected in the living room","When I am not home, let me know when any motion is detected in my house", "Turn on my Philips lamp every sunset","Update my picture in Twitter when I change my profile picture in Facebook","Save in notes when I create a new bookmark"],
+                                                   label = "Select a sample functionality description")
                     button_use_example = gr.Button("Try this sample")
                     
             with gr.Box():
@@ -520,15 +529,15 @@ with demo:
                     button_discover_function = gr.Button("Discover Functions!")
                     
                     gr.Markdown("<br>")
-                    gr.Markdown("<h4><center>Relevant Trigger Channels</center></h4>")
+                    gr.Markdown("<h4><center>Relevant Trigger Channels and Functionalities</center></h4>")
                     table_discover_tc = gr.Dataframe(headers=["Trigger", "Available Functions", "Trigger Description"], row_count=1)
 
                     gr.Markdown("<br>")
-                    gr.Markdown("<h4><center>Relevant Action Channels</center></h4>")
+                    gr.Markdown("<h4><center>Relevant Action Channels and Functionalities</center></h4>")
                     table_discover_ac = gr.Dataframe(headers=["Action", "Available Functions", "Action Description"], row_count=1)
         
             button_use_example.click(return_same, inputs=[dropdown_example], outputs=[textbox_input])            
-            button_use_example.click(generate_channel, inputs=[textbox_input, n_beams_discover], outputs=[table_discover_tc, table_discover_ac])
+            button_use_example.click(generate_channel, inputs=[dropdown_example, n_beams_discover], outputs=[table_discover_tc, table_discover_ac])
             button_discover_function.click(generate_channel, inputs=[textbox_input, n_beams_discover], outputs=[table_discover_tc, table_discover_ac])
 
 demo.launch(server_port=8333, server_name="0.0.0.0")
