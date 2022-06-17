@@ -369,36 +369,36 @@ with demo:
     # gr.Markdown("This demo allows you to generate TAPs using functionality description described in English. You can learn the working detail of our tool from our paper")
     gr.Markdown("<h3>What is TAP?</h3>")
     gr.Markdown("""
-        TAPs or Trigger Action Programs are event-driven rules used to automate smart devices and/or internet services. TAPs are written in the form of "IF a **{trigger}** is
-        satisfied then execute an **{action}**, where the **{trigger}** and the **{action}** correspond to API calls. TAPs have been used in various use cases, ranging from home monitoring 
-        system to business workflow automation.
+        TAPs or Trigger Action Programs are event-driven rules used to automate smart devices and/or internet services. 
+        TAPs are written in the form of "IF a {trigger} is satisfied then execute an {action}, where the {trigger} and the {action} correspond to API calls. 
+        TAPs have been used in various use cases, ranging from the home monitoring system to business workflow automation.
         """)
     gr.Markdown("<h3>What is RecipeGen?</h3>")
     gr.Markdown("""
-        RecipeGen is a deep learning-based tool that can assist end-users to generate TAPs using natural language description. End-users can describe the functionality of the intended TAP, then RecipeGen
-        will generate the TAP candidates based on the given description.
+        RecipeGen is a deep learning-based tool that can assist end-users to generate TAPs using natural language description. 
+        End-users can describe the functionality of the intended TAP, then RecipeGen will generate the TAP candidates based on the given description.
     """)
     gr.Markdown("<h3>Working Mode</h3>")
     gr.Markdown("""
-        - Interactive: generate a TAP using step-by-step wizard
-        - One Click: generate a TAP using one click button
-        - Function Discovery: Discover relevant functionalities from channels with a similar functionalities
+        - Interactive: generate a TAP using a step-by-step wizard
+        - One-Click: generate a TAP using the one-click button
+        - Function Discovery: Discover relevant functionalities from channels with similar functionalities
     """)
     with gr.Tabs():
         with gr.TabItem("Interactive"):
             gr.Markdown("<h3><center>Instructions for Interactive Mode</center></h3>")
             gr.Markdown("""1. There are 5 generation steps, i.e., generating trigger channel, trigger function, action channel, action function, and the final TAP.
-                2. **[STEP 1]** Describe the functionality in the `Functionality Description` text box. Click `Generate Trigger Channel` button. The channel candidates and their descriptions will show up in the `Trigger Channel Results` table.
-                3. **[STEP 2]** Select a trigger channel from the dropdown `Select the Trigger Channel`. Click `Generate Trigger Function` button. The function candidates and their descriptions will show up in the `Trigger Function Results` table.
-                4. **[STEP 3]** Select a trigger function from the dropdown `Select the Trigger Function`. Click `Generate Action Channel` button. The channel candidates and their descriptions will show up in the `Action Channel Results` table.
-                5. **[STEP 4]** Select an action channel from the dropdown `Select the Action Channel`. Click `Generate Action Function` button. The function candidates and their descriptions will show up in the `Action Function Results` table.
-                6. **[STEP 5]** Select an action function  from the `Select the Action Function` to generate the final TAP.""")
-            gr.Markdown(""" NOTE: You can control how many sequences are returned by tuning the `Beam Width` slider. Larger value will cause longer generation time.
+                2. **[STEP 1]** Describe the functionality in the `Functionality Description` text box. Click the `Generate Trigger Channel` button. The channel candidates and their descriptions will show up in the `Trigger Channel Results` table.
+                3. **[STEP 2]** Select a trigger channel from the dropdown `Select the Trigger Channel`. Click the `Generate Trigger Function` button. The function candidates and their descriptions will show up in the `Trigger Function Results` table.
+                4. **[STEP 3]** Select a trigger function from the dropdown `Select the Trigger Function`. Click the `Generate Action Channel` button. The channel candidates and their descriptions will show up in the `Action Channel Results` table.
+                5. **[STEP 4]** Select an action channel from the dropdown `Select the Action Channel`. Click the `Generate Action Function` button. The function candidates and their descriptions will show up in the `Action Function Results` table.
+                6. **[STEP 5]** Select an action function from the `Select the Action Function` to generate the final TAP.""")
+            gr.Markdown(""" NOTE: You can control how many sequences are returned by tuning the `Beam Width` slider. A larger value will cause a longer generation time.
             """)
             
             with gr.Box():
                 with gr.Column():
-                    dropdown_example = gr.Dropdown(type ="value",choices = ["Log to my spreadsheet if motion is detected in the living room","Notify me when someone open the front door", "Turn on my Philips lamp every sunset","Update my picture in Twitter when I change my profile picture in Facebook","Send and append to my note  when I create a new bookmark"], label = "Here are some sample functionality descriptions that you can try")
+                    dropdown_example = gr.Dropdown(type ="value",choices = ["Log to my spreadsheet if motion is detected in the living room","When I am not home, let me know when any motion is detected in my house", "Turn on my Philips lamp every sunset","Update my picture in Twitter when I change my profile picture in Facebook","Save in notes when I create a new bookmark"], label = "Here are some sample functionality descriptions that you can try")
                     button_use_example = gr.Button("Try this sample")
                          
             with gr.Box():
@@ -472,18 +472,18 @@ with demo:
             table_af.change(fn=update_dropdown_action_func, inputs=[table_af], outputs=[dropdown_af])
             dropdown_af.change(fn=set_final_result, inputs=[textbox_selected_tf, table_af, dropdown_af], outputs=[table_final])
 
-        with gr.TabItem("One Click"):
-            gr.Markdown("<h3><center>Instructions for One Click Mode</center></h3>")
+        with gr.TabItem("One-Click"):
+            gr.Markdown("<h3><center>Instructions for One-Click Mode</center></h3>")
             gr.Markdown("""
                 1. Describe the functionality in the `Functionality Description` text box.
                 2. Click `Generate TAP` button. The TAP candidates will show up in the `TAP Results` table. The table consists of 4 columns: Trigger, Action, Trigger Description, and Action Description. You can scroll the table vertically.
                 """)
-            gr.Markdown(""" NOTE: You can control how many sequences are returned by tuning the `Beam Width` slider. Larger value will cause longer generation time.""")
+            gr.Markdown(""" NOTE: You can control how many sequences are returned by tuning the `Beam Width` slider. A larger value will cause a longer generation time.""")
             
             with gr.Box():
                 with gr.Column():
                     gr.Markdown("You can try some description samples below:")
-                    dropdown_example = gr.Dropdown(type ="value",choices = ["Log to my spreadsheet if motion is detected in the living room","Notify me when someone open the front door", "Turn on my Philips lamp every sunset","Update my picture in Twitter when I change my profile picture in Facebook","Send and append to my note  when I create a new bookmark"], label = "Here are some sample functionality descriptions that you can try")
+                    dropdown_example = gr.Dropdown(type ="value",choices = ["Log to my spreadsheet if motion is detected in the living room","When I am not home, let me know when any motion is detected in my house", "Turn on my Philips lamp every sunset","Update my picture in Twitter when I change my profile picture in Facebook","Save in notes when I create a new bookmark"], label = "Here are some sample functionality descriptions that you can try")
                     button_use_example = gr.Button("Try this sample")
                     
             with gr.Box():
@@ -499,18 +499,18 @@ with demo:
             button_use_example.click(return_same, inputs=[dropdown_example], outputs=[textbox_input])            
             button_generate_oneshot.click(generate_oneshot, inputs=[textbox_input, n_beams_oneshot], outputs=[table_oneshot])
         
-        with gr.TabItem("Function Discovery"):
-            gr.Markdown("<h3><center>Instructions for One-shot Mode</center></h3>")
+        with gr.TabItem("Functionality Discovery"):
+            gr.Markdown("<h3><center>Instructions for Functionality Discovery Mode</center></h3>")
             gr.Markdown("""
                 1. Describe the functionality in the `Functionality Description` text box.
-                2. Click `Discover Functioanlities` button. The table containing relevant trigger and action channels will show up. Each channel is accompanied by a list of available functionalities.
+                2. Click `Discover Functionalities` button. The table containing relevant trigger and action channels will show up. Each channel is accompanied by a list of available functionalities.
                 """)
-            gr.Markdown(""" NOTE: You can control how many sequences are returned by tuning the `Beam Width` slider. Larger value will cause longer generation time.""")
+            gr.Markdown(""" NOTE: You can control how many sequences are returned by tuning the `Beam Width` slider. A larger value will cause a longer generation time.""")
             
             with gr.Box():
                 with gr.Column():
                     gr.Markdown("You can try some description samples below:")
-                    dropdown_example = gr.Dropdown(type ="value",choices = ["Log to my spreadsheet if motion is detected in the living room","Notify me when someone open the front door", "Turn on my Philips lamp every sunset","Update my picture in Twitter when I change my profile picture in Facebook","Send and append to my note  when I create a new bookmark"], label = "Here are some sample functionality descriptions that you can try")
+                    dropdown_example = gr.Dropdown(type ="value",choices = ["Log to my spreadsheet if motion is detected in the living room","When I am not home, let me know when any motion is detected in my house", "Turn on my Philips lamp every sunset","Update my picture in Twitter when I change my profile picture in Facebook","Save in notes when I create a new bookmark"], label = "Here are some sample functionality descriptions that you can try")
                     button_use_example = gr.Button("Try this sample")
                     
             with gr.Box():
@@ -528,6 +528,7 @@ with demo:
                     table_discover_ac = gr.Dataframe(headers=["Action", "Available Functions", "Action Description"], row_count=1)
         
             button_use_example.click(return_same, inputs=[dropdown_example], outputs=[textbox_input])            
+            button_use_example.click(generate_channel, inputs=[textbox_input, n_beams_discover], outputs=[table_discover_tc, table_discover_ac])
             button_discover_function.click(generate_channel, inputs=[textbox_input, n_beams_discover], outputs=[table_discover_tc, table_discover_ac])
 
 demo.launch(server_port=8333, server_name="0.0.0.0")
