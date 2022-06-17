@@ -418,7 +418,7 @@ with demo:
                     
                     gr.Markdown("<h4><center>Step 2: Generate Trigger Functions</center></h4>")
                     dropdown_tc = gr.Dropdown(label="Select the Trigger Channel",type="value", choices=[''])
-                    textbox_selected_tc = gr.Textbox(value="", visible=False)
+                    textbox_selected_tc = gr.Textbox(value="", visible=False, label="")
                     button_generate_tf = gr.Button("Generate Trigger Functions")
                     
                     gr.Markdown("<br>")
@@ -430,7 +430,7 @@ with demo:
                     
                     gr.Markdown("<h4><center>Step 3: Generate Action Channels</center></h4>")
                     dropdown_tf = gr.Dropdown(label="Select the Trigger Function",type="value", choices=[''])
-                    textbox_selected_tf = gr.Textbox(value="", visible=False)
+                    textbox_selected_tf = gr.Textbox(value="", visible=False, label="")
                     button_generate_ac = gr.Button("Generate Action Channels")
                     
                     gr.Markdown("<br>")
@@ -441,7 +441,7 @@ with demo:
                 with gr.Column():
                     gr.Markdown("<h4><center>Step 4: Generate Action Functions</center></h4>")
                     dropdown_ac = gr.Dropdown(label="Select the Action Channel",type="value", choices=[''])
-                    textbox_selected_ac = gr.Textbox(value="", visible=False)
+                    textbox_selected_ac = gr.Textbox(value="", visible=False, label="")
                     
                     button_generate_af = gr.Button("Generate Action Functions")
                     gr.Markdown("<br>")
