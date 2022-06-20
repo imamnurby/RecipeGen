@@ -176,27 +176,8 @@ def compute_metrics(eval_preds):
            "bleu_em": (bleu_dict['score']+em_dict['exact_match'])/2}
 ###
 
-### HELPER EVALUATION
-def evaluate_trainer(output_dir, split=None, suffix=None):
-    assert(split in tokenized_datasets)
-    res = trainer.evaluate(eval_dataset=tokenized_datasets[split])
-    print(res)
-    
-    filename = f"{output_dir}/metrics_{split}.txt" if suffix==None else f"{output_dir}/metrics_{split}_{suffix}.txt" 
-    with open(filename, "a") as f:
-        json.dump(res, f)
-        f.write("\n")
-    return res
-###
-
-
 if __name__ == "__main__":
     df_dict = get_dataset_path()
-
-    # if DATA_NUM:
-    #     df_dict = load_dataset(number=DATA_NUM)
-    # else:
-    #     df_dict = load_dataset(path_dict=path_dict)
 
     dataset = convert_to_dataset(df_dict=df_dict)
     tokenizer = load_tokenizer()
@@ -232,7 +213,4 @@ if __name__ == "__main__":
     )
 
     trainer.train()
-    # evaluate_trainer(split='val')
-    # evaluate_trainer(split='gold')
-    # evaluate_trainer(split='noisy')
 
