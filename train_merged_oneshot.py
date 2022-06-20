@@ -18,7 +18,7 @@ import json
 
 ### EXPERIMENT VARIABLE
 DECODER_CLASSES = {'roberta-base': (RobertaForCausalLM, RobertaConfig)}
-DATASET_PATH = "dataset-original"
+DATASET_PATH = "dataset"
 
 # specify pretrained model
 MODEL = "roberta"
@@ -28,9 +28,9 @@ assert(MODEL in ('roberta', 'codebert'))
 EXPERIMENT = "merged-prefix-ch-fc-field"
 assert(EXPERIMENT in ('merged-prefix-ch-fc-field'))
 
-OUTPUT_DIR = "models/rob2rand_merged_w_prefix_2-6-22_cont"
+OUTPUT_DIR = "models/rob2rand_oneshot"
 
-LOAD_FROM_CKPT = True
+LOAD_FROM_CKPT = False
 if LOAD_FROM_CKPT:
     ckpt = "models/rob2rand_merged_w_prefix_2-6-22/checkpoint-243428"
     # assert(os.path.exists(ckpt) == True)
