@@ -21,4 +21,4 @@ Follow the instruction in `inference.ipynb`. Do not forget to check the inferenc
 We release our model checkpoints and the corresponding inference results [here](https://zenodo.org/record/6668462#.YrAMh6hByUk).
 
 # Prior Work
-This tool is created based on our prior work that is accepted at ICPC 2022. For those who are interested in more comprehensive explanations and also experiments, you can check it (here)[https://github.com/imamnurby/RecipeGen-IFTTT-RP] for the repo and (here)[https://imamnurby.github.io/files/ICPC_CR_Version%20(4).pdf] for the preprint. 
+This tool is created based on our prior work that is accepted at ICPC 2022. For those who are interested in more comprehensive explanations and also experiments, you can check it [here](https://github.com/imamnurby/RecipeGen-IFTTT-RP) for the repo and [here](https://imamnurby.github.io/files/ICPC_CR_Version%20(4).pdf) for the paper. 
