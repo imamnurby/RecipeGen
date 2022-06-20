@@ -16,4 +16,4 @@ We provide a Dockerfile to instatiate the environment that we use. You can setti
 To train a model (either Interactive or One-Click), you can simply run `python3 <script-name>`. The training setting is can be changed by modifying `args` initialization in the beginning of the script
 
 # Inference
-- Follow the instruction in `inference.ipynb`. Do not forget to check the inference parameter in the beginning of the notebook.
+Follow the instruction in `inference.ipynb`. Do not forget to check the inference parameter in the beginning of the notebook.
