@@ -1,0 +1,11 @@
+datasets==2.1.0
+gradio==3.0.17
+more_itertools==8.13.0
+numpy==1.19.2
+packaging==21.3
+pandas==1.4.2
+ray==1.13.0
+torch==1.7.1
+tqdm==4.64.0
+transformers==4.18.0
+wandb==0.12.18
