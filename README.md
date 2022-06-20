@@ -8,7 +8,7 @@ This is a replication package for our paper titled **RecipeGen++: An Automated T
 - `inference.ipynb` is a script to perform inference using the trained model and compute the metrics
 - `gradio_app/app.py` contains *RecipeGen++* implementation
 
-# Setting up the environment
+# Setting Environment
 We provide a Dockerfile to instatiate the environment that we use. You can setting the environment by running `docker build Dockerfile --tag <name:tag>`.
 
 # Training
