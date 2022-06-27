@@ -12,7 +12,7 @@ This is a replication package for our paper titled **RecipeGen++: An Automated T
 We provide a Dockerfile to instatiate the environment that we use. You can set up the environment by running `docker build Dockerfile --tag <name:tag>`.
 
 # Training
-To train a model:(either Interactive or One-Click), you can simply run `python3 <script-name>`. The training settings can be changed by modifying the `args` initialization in the beginning of the script.
+To train a model (either Interactive or One-Click), you can simply run `python3 <script-name>`. The training settings can be changed by modifying the `args` initialization in the beginning of the script.
 
 # Inference
 Follow the instructions in `inference.ipynb` to perform inference using the trained model and compute the metrics. 
