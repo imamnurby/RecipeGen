@@ -9,7 +9,7 @@ This is a replication package for our paper titled **RecipeGen++: An Automated T
 - `gradio_app/app.py` contains *RecipeGen++* implementation
 
 # Setting Environment
-We provide a Dockerfile to instatiate the environment that we use. You can set up the environment by running `docker build Dockerfile --tag <name:tag>`.
+We provide a Dockerfile to instantiate the environment that we use. You can set up the environment by running `docker build Dockerfile --tag <name:tag>`.
 
 # Training
 To train a model (either Interactive or One-Click), you can simply run `python3 <script-name>`. The training settings can be changed by modifying the `args` initialization in the beginning of the script.
@@ -22,4 +22,4 @@ Follow the instructions in `inference.ipynb` to perform inference using the trai
 We release our model checkpoints and the corresponding inference results [here](https://zenodo.org/record/6668462#.YrAMh6hByUk).
 
 # Prior Work
-This tool is created based on our prior work that was accepted at ICPC 2022. For those who are interested in more comprehensive explanations and experiments, you can check the repo [here](https://github.com/imamnurby/RecipeGen-IFTTT-RP) and the paper [here](https://imamnurby.github.io/files/ICPC_CR_Version%20(4).pdf). 
+This tool is created based on our prior work that is accepted at ICPC 2022. For those who are interested in more comprehensive explanations and experiments, you can check the repo [here](https://github.com/imamnurby/RecipeGen-IFTTT-RP) and the paper [here](https://imamnurby.github.io/files/ICPC_CR_Version%20(4).pdf). 
